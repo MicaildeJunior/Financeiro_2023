@@ -14,5 +14,5 @@ public class Base : Notifica
     public int Id { get; set; }
 
     [Display(Name = "Nome")]
-    public string Name { get; set; }
+    public string Nome { get; set; }
 }
