@@ -40,6 +40,6 @@ public class ContextBase : IdentityDbContext<ApplicationUser>
 
     public string ObterStringConexao()
     {
-        return "Data Source=LAPTOP-563RGJKO\\sqlexpress;Initial Catalog=FINANCEIRO_2023;Integrated Security=True";
+        return "Data Source=LAPTOP-563RGJKO\\sqlexpress;Initial Catalog=FINANCEIRO_2023;Integrated Security=True;TrustServerCertificate=True;";
     }
 }
