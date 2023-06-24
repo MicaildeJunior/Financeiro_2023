@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.InterfaceServicos;
 using Domain.Interfaces.IUsuarioSistemaFinanceiro;
 using Entities.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UsuarioSistemaFinanceiroController : ControllerBase
 {
     private readonly InterfaceUsuarioSistemaFinanceiro _InterfaceUsuarioSistemaFinanceiro;
@@ -32,7 +34,7 @@ public class UsuarioSistemaFinanceiroController : ControllerBase
         return await _InterfaceUsuarioSistemaFinanceiro.ListarUsuarioSistema(idSistema);
     }
 
-    // Metodo que ira Cadastrar um Usuario
+    // Metodo que ira Cadastrar um Usuario no sistema
     [HttpPost("/api/CadastrarUsuarioNoSistema")]
     [Produces("application/json")]
     public async Task<object> CadastrarUsuarioNoSistema(int idSistema, string emailUsuario)
@@ -40,13 +42,13 @@ public class UsuarioSistemaFinanceiroController : ControllerBase
         try
         {
             await _IUsuarioSistemaFinanceiroServico.CadastrarUsuarioNoSistema(
-            new UsuarioSistemaFinanceiro
-            {
-                IdSistema = idSistema,
-                EmailUsuario = emailUsuario,
-                Administrador = false,
-                SistemaAtual = true
-            });
+                new UsuarioSistemaFinanceiro
+                {
+                    IdSistema = idSistema,
+                    EmailUsuario = emailUsuario,
+                    Administrador = false,
+                    SistemaAtual = true
+                });
         }
         catch (Exception)
         {

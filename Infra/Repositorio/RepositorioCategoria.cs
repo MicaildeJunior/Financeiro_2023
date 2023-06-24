@@ -21,7 +21,7 @@ public class RepositorioCategoria : RepositoryGenerics<Categoria>, InterfaceCate
     }
 
     // Método que irá retornar uma lista de Categorias de Usuario
-    public async Task<IList<Categoria>> ListarCategoriaUsuario(string emailUsuario)
+    public async Task<IList<Categoria>> ListarCategoriasUsuario(string emailUsuario)
     {
         using (var banco = new ContextBase(_OptionsBuilder))
         {

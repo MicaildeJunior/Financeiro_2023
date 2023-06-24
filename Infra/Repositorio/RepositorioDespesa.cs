@@ -22,7 +22,7 @@ public class RepositorioDespesa : RepositoryGenerics<Despesa>, InterfaceDespesa
     }
 
     // Método que irá retornar uma Lista de Despesa Usuario
-    public async Task<IList<Despesa>> ListDespesaUsuario(string emailUsuario)
+    public async Task<IList<Despesa>> ListarDespesasUsuario(string emailUsuario)
     {
         using (var banco = new ContextBase(_OptionsBuilder)) 
         {
@@ -37,7 +37,7 @@ public class RepositorioDespesa : RepositoryGenerics<Despesa>, InterfaceDespesa
     }
 
     // Método que irá retornar uma List de DespesaUsuarioNaoPagasMesesAnterior
-    public async Task<IList<Despesa>> ListDespesaUsuarioNaoPagasMesesAnterior(string emailUsuario)
+    public async Task<IList<Despesa>> ListarDespesasUsuarioNaoPagasMesesAnterior(string emailUsuario)
     {
         using (var banco = new ContextBase(_OptionsBuilder))
         {

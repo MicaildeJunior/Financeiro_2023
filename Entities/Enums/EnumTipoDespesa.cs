@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Entities.Enums;
 
-namespace Entities.Enums
+public enum EnumTipodespesa
 {
-    public enum EnumTipodespesa
-    {
-        Contas = 1,
-        Investimento = 2
-    }
+    Contas = 1,
+    Investimento = 2
 }

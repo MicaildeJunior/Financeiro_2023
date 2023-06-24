@@ -2,6 +2,7 @@
 using Domain.Interfaces.ISistemaFinanceiro;
 using Domain.Servicos;
 using Entities.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,10 +11,11 @@ namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class SistemaFinanceiroController : ControllerBase
 {
     private readonly InterfaceSistemaFinanceiro _interfaceSistemaFinanceiro;
-    private readonly ISistemaFinanceiroServico _iSistemaFinanceiroServico;
+    private readonly ISistemaFinanceiroServico _ISistemaFinanceiroServico;
     private readonly ILogger<SistemaFinanceiroController> _logger;
 
     public SistemaFinanceiroController(InterfaceSistemaFinanceiro interfaceSistemaFinanceiro, 
@@ -21,25 +23,25 @@ public class SistemaFinanceiroController : ControllerBase
         ILogger<SistemaFinanceiroController> logger)
     {
         _interfaceSistemaFinanceiro = interfaceSistemaFinanceiro;
-        _iSistemaFinanceiroServico = iSistemaFinanceiroServico;
+        _ISistemaFinanceiroServico = iSistemaFinanceiroServico;
         _logger = logger;
 
     }
 
     // Método que ListaSistemaUsuario
-    [HttpGet("/api/ListasSistemaUsuario")]
+    [HttpGet("/api/ListaSistemaUsuario")]
     [Produces("application/json")]   
-    public async Task<object> ListasSistemaUsuario(string emailUsuario)
+    public async Task<object> ListaSistemaUsuario(string emailUsuario)
     {
-        return await _interfaceSistemaFinanceiro.ListasSistemasUsuario(emailUsuario);
+        return await _interfaceSistemaFinanceiro.ListaSistemasUsuario(emailUsuario);
     }
 
-    // Método de Adicionar
+    // Método de Adicionar Sistema Financeiro
     [HttpPost("/api/AdicionarSistemaFinanceiro")]
     [Produces("application/json")]
     public async Task<object> AdicionarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro)
     {
-        await _iSistemaFinanceiroServico.AdicionarSistemaFinanceiro(sistemaFinanceiro);
+        await _ISistemaFinanceiroServico.AdicionarSistemaFinanceiro(sistemaFinanceiro);
 
         // Retornar o mesmo objeto que criamos, pra saber se criou ou não
         return Task.FromResult(sistemaFinanceiro);
@@ -50,7 +52,7 @@ public class SistemaFinanceiroController : ControllerBase
     [Produces("application/json")]
     public async Task<object> AtualizarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro)
     {
-        await _iSistemaFinanceiroServico.AtualizarSistemaFinanceiro(sistemaFinanceiro);
+        await _ISistemaFinanceiroServico.AtualizarSistemaFinanceiro(sistemaFinanceiro);
 
         // Retornar o objeto que atualizamos
         return Task.FromResult(sistemaFinanceiro);
@@ -65,7 +67,7 @@ public class SistemaFinanceiroController : ControllerBase
     }
 
     // Método de Deletar
-    [HttpDelete("/api/DeleteSistemaFinanceiro{id}")]
+    [HttpDelete("/api/DeleteSistemaFinanceiro")]
     [Produces("application/json")]
     public async Task<object> DeleteSistemaFinanceiro(int id)
     {
@@ -83,5 +85,5 @@ public class SistemaFinanceiroController : ControllerBase
         }
         
         return Ok("Sistema Financeiro deletado");
-    }
+    }    
 }

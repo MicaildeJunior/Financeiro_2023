@@ -22,7 +22,7 @@ public class RepositorioSistemaFinanceiro : RepositoryGenerics<SistemaFinanceiro
     }
 
     // Método que irá Listar todos os Sistemas Financeiros do Usuario
-    public async Task<IList<SistemaFinanceiro>> ListasSistemasUsuario(string emailUsuario)
+    public async Task<IList<SistemaFinanceiro>> ListaSistemasUsuario(string emailUsuario)
     {
         using (var banco = new ContextBase(_OptionsBuilder))
         {
