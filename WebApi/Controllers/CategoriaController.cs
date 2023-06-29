@@ -14,8 +14,8 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceCategoria _InterfaceCategoria;
         private readonly ICategoriaServico _ICategoriaServico;
-        private readonly ILogger _Logger;
-        public CategoriaController(InterfaceCategoria InterfaceCategoria, ICategoriaServico ICategoriaServico, ILogger Logger)
+        private readonly ILogger<CategoriaController> _Logger;
+        public CategoriaController(InterfaceCategoria InterfaceCategoria, ICategoriaServico ICategoriaServico, ILogger<CategoriaController> Logger)
         {
             _InterfaceCategoria = InterfaceCategoria;
             _ICategoriaServico = ICategoriaServico;
@@ -27,16 +27,26 @@ namespace WebApi.Controllers
         [Produces("application/json")]
         public async Task<object> ListarCategoriasUsuario(string emailUsuario)
         {
-            return _InterfaceCategoria.ListarCategoriasUsuario(emailUsuario);
+            return await _InterfaceCategoria.ListarCategoriasUsuario(emailUsuario);
         }
 
-        // Método de Acicionar Categoria
+        // Método de Adicionar Categoria
         [HttpPost("/api/AdicionarCategoria")]
         [Produces("application/json")]
         public async Task<object> AdicionarCategoria(Categoria categoria)
         {
-            await _ICategoriaServico.AdicionarCategoria(categoria);
+            try
+            {
+                await _ICategoriaServico.AdicionarCategoria(categoria);
+            }
+            catch (Exception ex)
+            {
+                // Era .LogError, mudei para testar a Controller AdicionarCategoria metodo POST
+                _Logger.LogInformation(ex, "Falha ao Adicionar Categoria");
 
+                return BadRequest("Não foi possivel adicionar a categoria");
+            }
+          
             // Retornar o mesmo objeto que criamos, pra saber se criou ou não
             return categoria;
         }
@@ -73,8 +83,8 @@ namespace WebApi.Controllers
                 await _InterfaceCategoria.Delete(categoria);
             }
             catch (Exception ex)
-            {
-                _Logger.LogError(ex, "Falha ao remover a categoria", id);
+            {                
+                _Logger.LogInformation(ex, "Falha ao remover a categoria", id);
 
                 return BadRequest("Não foi possivel deletar a Categoria"); ;
             }

@@ -23,6 +23,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Adicionado para tentar resolver o erro de Adicionar Categoria na API
+builder.Services.AddLogging();
 
 // CONFIGURAÇÃO DO BANCO DE DADOS 
 builder.Services.AddDbContext<ContextBase>(options =>
@@ -85,6 +87,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // Adicionado para tentar resolver o problema do metodo POST adicionar Categoria
+    app.UseHttpLogging();
 }
 
 app.UseHttpsRedirection();

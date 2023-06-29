@@ -1,10 +1,5 @@
 ﻿using Entities.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Entidades;
 
@@ -27,5 +22,5 @@ public class Despesa : Base
     [Column(Order = 1)]
     public int IdCategoria { get; set; }
     // Foreign Key com Tabela Categoria
-    public virtual Categoria Categoria { get; set; }
+    //public virtual Categoria Categoria { get; set; }
 }

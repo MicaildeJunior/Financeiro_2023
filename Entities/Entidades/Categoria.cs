@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Entidades;
 
@@ -14,5 +9,5 @@ public class Categoria : Base
     [Column(Order = 1)]
     public int IdSistema { get; set; }
     // Foreign Key com Tabela SistemaFinanceiro
-    public virtual SistemaFinanceiro SistemaFinanceiro { get; set; }
+    //public virtual SistemaFinanceiro SistemaFinanceiro { get; set; }
 }
